@@ -27,7 +27,8 @@ class RequestLoggerService
         'common' => '{remote-addr} - {remote-user} [{date}] "{method} {url} HTTP/{http-version}" {status} {content-length}',
         'dev' => '{method} {url} {status} {response-time} s - {content-length}',
         'short' => '{remote-addr} {remote-user} {method} {url} HTTP/{http-version} {status} {content-length} - {response-time} s',
-        'tiny' => '{method} {url} {status} {content-length} - {response-time} s'
+        'tiny' => '{method} {url} {status} {content-length} - {response-time} s',
+        'custom' => '[ {"method": "{method}", "status": {status}},{"user": "{user}", "userID": {request-userid}, "org_id": {request-org}}, {"url": "{full-url}","format": "{format}", "params": {request-content} }]',
     ];
     /**
      * @var RequestInterpolation
