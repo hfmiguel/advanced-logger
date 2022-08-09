@@ -45,6 +45,7 @@ class RequestInterpolation extends BaseInterpolation
             'body',
             'query',
             'user',
+
         ], [
             'ip',
             'getScheme',
@@ -93,6 +94,26 @@ class RequestInterpolation extends BaseInterpolation
             switch ($matches[0]) {
                 case 'date':
                     $matches[] = 'clf';
+                    break;
+                case "request-content":
+                    if ($data = $this->request->all()){
+                        $dados = json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK|JSON_PRESERVE_ZERO_FRACTION);
+                        // $dados = \str_replace("\s", " ", $dados);
+                        return $dados;
+                    }else
+                        return "";
+                    break;
+                case "request-org":
+                    if ($this->request->user())
+                        return $this->request->user()->orga_id  ?? null;
+                    else
+                        return "";
+                    break;
+                case "request-userid":
+                    if ($this->request->user())
+                        return $this->request->user()->id  ?? null;
+                    else
+                        return "";
                     break;
             }
         }
